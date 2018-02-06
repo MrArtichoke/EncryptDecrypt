@@ -1,0 +1,43 @@
+1. Basic information
+Team Number : 20
+Student ID# of Submitter: 1527842
+Name of Submitter: Vincent Della Morte
+ID#s and Names for others on the Team:
+
+Christopher Canchola ID#1348314
+Nazanin Tafrishi ID#1562992
+
+
+2. Internal Record Format:
+Our record format design satisfies O(1) field access because of our use of field pointers. 
+Instead of looking through all the field records, we can just use the pointer and will get the data.
+
+We store a VarChar field by copying the bytes into the record. The fact that the length 
+varies does not matter because of our use of field pointers; for example, if the size of 
+the VarChar is more than 4 bytes we don’t need to know the length.
+
+As for the format:
+the first four bytes of a record are the number of fields within the record.
+
+the next ceil(#fields/8) bytes are the null indicator
+
+the next #fields * 4 bytes are the pointers to the starting indexes of the respective 
+fields (order is found in the recorddescriptor)
+
+the last bytes of the record are the field values themselves.
+
+3. Page Format:
+We use the slides as a backdrop for the page format design; we used variable length 
+record page format with slots at the front and a slot directory at the end of the page with
+free space in the middle as in the slides.
+
+4. Implementation Detail
+In the rbfm.cc file we made helper functions for the insertRecord() function: 
+insertrecord_get_record_length() (to get the length of the record), insertrecord_insert_into_page() 
+(inserts into a page) and insertrecord_choose_page() (which include a parameter for the 
+page number that the record will be inserted into; if there is no page we make a new page - 
+this function also use the insertrecord_insert_into_page() function as an additional helper).
+
+
+5. Other (optional):
+null

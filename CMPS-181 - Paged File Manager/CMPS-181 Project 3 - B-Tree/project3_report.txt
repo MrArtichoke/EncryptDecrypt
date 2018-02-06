@@ -1,0 +1,46 @@
+1. Basic information
+Team number (e.g., 01) : 20
+#1 Student ID : 1348314
+#1 Student Name : Christopher Canchola
+#2 Student ID : 1527842
+#2 Student Name : Vincent Della Morte
+#3 Student ID : 1562992
+#3 Student Name : Nazanin Tafrishi
+
+2. Meta-data page in an index file
+- Show your meta-data page of an index design if you have any. 
+
+
+3. Index Entry Format
+- Show your index entry design (structure). 
+Each index entry consists of the entry itself (with length info if varchar) followed by RID
+
+4. Page Format
+- Show your internal-page (non-leaf node) design.
+At the beginning of a non-leaf page, there is an index directory which consists of a
+#entries value which holds the number of pointers to child nodes in this node.  directly 
+after the index directory, there is the first pointer to a child node followed by a traffic
+cop which is the same as a data entry but without the RID followed by another child pointer.
+  It continues on in this fashion, as on the lecture slides.  The free space is all at the 
+end of the file.  
+
+
+- Show your leaf-page (leaf node) design.
+At the beginning of a leaf page, there is a leaf directory which consists of a pointer to
+the leaf with the highest value keys less than the keys in the current leaf.  Next is a pointer
+to the leaf with the lowest value keys greater than the keys in the current leaf.  Next is 
+the number of entries in the leaf.  Lastly is the free space offset.  After the leaf directory
+is the data entries in key,rid format.
+
+5. Implementation Detail
+- Have you implemented non-lazy deletion? Choose Yes or No: Also provide implementation details if yes.
+NO
+
+- Other implementation details:
+The root page is always the 0th page.  If there is only one node in the tree, the root 
+holds data entries rather than traffic cops and pointers and has #entries and free space 
+pointer in its directory as well as the regular index directory(described above).  
+
+6. Other (optional)
+- Freely use this section to tell us about things that are related to the project 3, but not related to the other sections (optional)
+
