@@ -1,0 +1,23 @@
+RBFM::READATTRIBUTE() - 
+    when a varchar is read, the size is added to the first four bytes of data with the value following
+    (!!!!!)need to add a null indicator before the value and change everything which calls readattr to match(!!!!!)
+    
+RBFM::DELETERECORD() - 
+    the slot directory is not compacted, the length of the deleted record will be set to negative in the
+    correspinding entry in the slot directory.
+    
+RBFM::SCAN() - 
+    (!!!!!)iterator implementation still needs discussion(!!!!!)
+    (!!!!!)records which have forwarding addresses may be scanned twice, needs fixing(!!!!!)
+    (!!!!!)fetch operations all need to take address forwarding into accout(!!!!!)
+    
+RBFM::UPDATERECORD() - 
+    since slotnum starts at zero and it needs to be made negative to indicate a forwarding address, -413 indicates 
+    a forwarding address slotnum of zero.  A new slot directory record entry is added to the new file when an updated
+    record needs to use a forwarding address and the slot header is updated accordingly.
+    
+RM::UPDATE_COLS() -
+    updates the cols for the most recently added table only
+    
+RM::GETATTRIBUTES() - 
+    (!!!!!)may return too many characters for attribute name(!!!!!)
